@@ -1,0 +1,26 @@
+server:
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: appuser
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    root: INFO
+    com.tuempresa.backend: DEBUG
+
+app:
+  jwtSecret: MyVerySecretKeyThatShouldBeLong
+  jwtExpirationMs: 86400000
+
+springdoc:
+  swagger-ui:
+    url: /openapi.yaml
