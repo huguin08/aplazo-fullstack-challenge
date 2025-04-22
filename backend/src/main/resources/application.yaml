@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appdb
+    username: appuser
+    password: secret
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  security:
+    user:
+      name: admin
+      password: admin123
+
+logging:
+  level:
+    root: INFO
+    com.aplazo.backend: DEBUG
+
+app:
+  jwtSecret: MyVerySecretKeyThatShouldBeLong
+  jwtExpirationMs: 86400000
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
