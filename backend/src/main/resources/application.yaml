@@ -12,15 +12,21 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  security:
+    user:
+      name: admin
+      password: admin123
+
 logging:
   level:
     root: INFO
-    com.tuempresa.backend: DEBUG
+    com.aplazo.backend: DEBUG
 
 app:
   jwtSecret: MyVerySecretKeyThatShouldBeLong
   jwtExpirationMs: 86400000
 
 springdoc:
+  api-docs:
+    path: /v3/api-docs
   swagger-ui:
-    url: /openapi.yaml

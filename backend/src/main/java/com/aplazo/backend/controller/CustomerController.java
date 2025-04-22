@@ -2,6 +2,7 @@ package com.aplazo.backend.controller;
 
 import com.aplazo.backend.dto.CustomerRequestDto;
 import com.aplazo.backend.dto.CustomerResponseDto;
+import com.aplazo.backend.security.JwtUtils;
 import com.aplazo.backend.service.CustomerService;
 import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
