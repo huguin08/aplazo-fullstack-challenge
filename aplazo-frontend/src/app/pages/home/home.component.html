@@ -1,1 +1,43 @@
-<p>home works!</p>
+<ui-card class="home-card">
+    <h2>Crear Préstamo</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <!-- Customer ID -->
+      <ui-input
+        [control]="form.get('customerId')"
+        label="Customer ID (UUID) *"
+        placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      >
+        <div error *ngIf="form.get('customerId')?.hasError('required')">
+          Requerido
+        </div>
+        <div error *ngIf="form.get('customerId')?.hasError('pattern')">
+          Formato inválido (UUID)
+        </div>
+      </ui-input>
+  
+      <!-- Amount -->
+      <ui-input
+        [control]="form.get('amount')"
+        label="Monto *"
+        placeholder="Ingresa el monto"
+      >
+        <div error *ngIf="form.get('amount')?.hasError('required')">
+          Requerido
+        </div>
+        <div error *ngIf="form.get('amount')?.hasError('min')">
+          El monto debe ser al menos 1
+        </div>
+      </ui-input>
+  
+      <!-- Botón de envío -->
+      <ui-button type="submit" [disabled]="form.invalid || loading" block>
+        {{ loading ? 'Creando...' : 'Crear Préstamo' }}
+      </ui-button>
+  
+      <!-- Mensaje de éxito -->
+      <p *ngIf="successMessage" class="success">
+        {{ successMessage }}
+      </p>
+    </form>
+  </ui-card>
