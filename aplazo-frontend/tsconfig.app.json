@@ -3,20 +3,19 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
-    "types": [
-      "node"
-    ]
+    "outDir": "./out-tsc/app"
   },
-  "files": [
-    "src/main.ts",
-    "src/main.server.ts",
-    "server.ts",
+  "files": [    
+    "src/main.ts",    
     "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.d.ts",
-    "src/**/*.ts",
-    "projects/shared-ui/src/**/*"
+    "projects/shared-ui/src/lib/**/*.ts",
+    "projects/shared-ui/src/lib/**/*.scss"
+  ], 
+  "exclude": [
+    "src/**/*.spec.ts",
+    "projects/shared-ui/src/**/*.spec.ts"
   ]
 }

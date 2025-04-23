@@ -30,7 +30,10 @@ import { RegisterDto } from '../../entities/register-dto';
     UiButtonModule
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  host: {
+    'class': 'register-card'     // <- inyecta la clase en el host <app-register>
+  }
 })
 export class RegisterComponent {
   form = this.fb.group({

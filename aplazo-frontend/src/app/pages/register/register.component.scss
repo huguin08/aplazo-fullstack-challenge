@@ -1,4 +1,11 @@
-.register-card {
+/*.register-card {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }*/
+
+  :host {
+    display: block;         /* necesario para que margin auto funcione */
     max-width: 400px;
     margin: 2rem auto;
     padding: 1.5rem;
