@@ -1,20 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  ActivatedRoute,
+  NavigationEnd,
+  RouterOutlet,
+  RouterLink,
+  RouterLinkActive,
+  RouterModule
+} from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
+import { CommonModule } from '@angular/common';
 
-// Ajusta estas rutas según tu librería UI:
+
 import { UiButtonModule } from '../../projects/shared-ui/src/lib/ui-button/ui-button.module';
 
 @Component({
   standalone: true,
   selector: 'apz-root',
-  imports: [RouterOutlet, UiButtonModule],
+  imports: [CommonModule,RouterOutlet, RouterModule,UiButtonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   pageTitle = 'Aplazo';
+
+
+links = [
+  { path: '/apz/home',     title: 'Inicio',   iconClass: 'fas fa-home'    },
+  { path: '/apz/historial', title: 'Historial', iconClass: 'fas fa-history' }
+];
 
   constructor(
     private router: Router,

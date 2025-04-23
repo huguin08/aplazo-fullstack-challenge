@@ -9,4 +9,25 @@
     <ui-button (click)="logout()">Cerrar sesión</ui-button>
   </header>
   
-  <router-outlet></router-outlet>
+  <div class="app-body">
+    <!-- Menú lateral -->
+    <nav class="sidenav">
+      <ul>
+        <li *ngFor="let link of links">
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i [class]="link.iconClass"></i>
+            <span>{{ link.title }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  
+    <!-- Contenido principal -->
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
