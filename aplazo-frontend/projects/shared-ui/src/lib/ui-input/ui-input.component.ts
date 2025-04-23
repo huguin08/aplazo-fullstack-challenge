@@ -1,15 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ui-input',
-  template: `
-    <label *ngIf="label">{{ label }}</label>
-    <input [formControl]="control" [placeholder]="placeholder" />
-    <ng-content select="[error]"></ng-content>
-  `
+  templateUrl: './ui-input.component.html',
+  styleUrls : ['./ui-input.component.scss']
 })
 export class UiInputComponent {
-  @Input() label!: string;
-  @Input() placeholder = '';
-  @Input() control: any;
+  @Input() type: string = 'text';
+  @Input() label?: string;
+  @Input() control!: FormControl;
 }

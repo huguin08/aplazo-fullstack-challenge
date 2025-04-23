@@ -4,11 +4,13 @@ import {
   ReactiveFormsModule,
   FormBuilder,
   Validators,
-  AbstractControl
+  AbstractControl,
+  FormControl,
+  NonNullableFormBuilder
 } from '@angular/forms';
-import { NonNullableFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+
 import { UiCardModule }       from '../../../../projects/shared-ui/src/lib/ui-card/ui-card.module';
 import { UiInputModule }      from '../../../../projects/shared-ui/src/lib/ui-input/ui-input.module';
 import { UiDatePickerModule } from '../../../../projects/shared-ui/src/lib/ui-date-picker/ui-date-picker.module';
@@ -32,7 +34,7 @@ import { RegisterDto } from '../../entities/register-dto';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   host: {
-    'class': 'register-card'     // <- inyecta la clase en el host <app-register>
+    'class': 'register-card'
   }
 })
 export class RegisterComponent {
@@ -52,6 +54,15 @@ export class RegisterComponent {
     private router: Router
   ) {}
 
+  // Getters para evitar errores de tipos en el template
+  get firstNameControl()   { return this.form.get('firstName') as FormControl; }
+  get lastNameControl()    { return this.form.get('lastName') as FormControl; }
+  get middleNameControl()  { return this.form.get('middleName') as FormControl; }
+  get birthDateControl()   { return this.form.get('birthDate') as FormControl; }
+  get sexControl()         { return this.form.get('sex') as FormControl; }
+  get birthPlaceControl()  { return this.form.get('birthPlace') as FormControl; }
+  get curpControl()        { return this.form.get('curp') as FormControl; }
+
   ofLegalAgeValidator(control: AbstractControl) {
     const dob = new Date(control.value);
     const age = (Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365);
@@ -63,19 +74,17 @@ export class RegisterComponent {
       this.form.markAllAsTouched();
       return;
     }
-  
-    // 1) Extraemos cada valor asegurándonos de que no sea undefined
+
     const payload: RegisterDto = {
-      firstName:   this.form.get('firstName')!.value!,
-      lastName:    this.form.get('lastName')!.value!,
-      middleName:  this.form.get('middleName')!.value!,
-      birthDate:   this.form.get('birthDate')!.value!,
-      sex:         this.form.get('sex')!.value ?? '',
-      birthPlace:  this.form.get('birthPlace')!.value ?? '',
-      curp:        this.form.get('curp')!.value ?? ''
+      firstName:   this.firstNameControl.value!,
+      lastName:    this.lastNameControl.value!,
+      middleName:  this.middleNameControl.value!,
+      birthDate:   this.birthDateControl.value!,
+      sex:         this.sexControl.value ?? '',
+      birthPlace:  this.birthPlaceControl.value ?? '',
+      curp:        this.curpControl.value ?? ''
     };
-  
-    // 2) Llamamos al servicio con el tipo correcto
+
     this.authService.register(payload).subscribe({
       next: () => this.router.navigate(['/apz/home']),
       error: err => console.error(err)

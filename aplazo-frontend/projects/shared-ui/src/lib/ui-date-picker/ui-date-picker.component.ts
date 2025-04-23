@@ -1,14 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ui-date-picker',
-  template: `
-    <label *ngIf="label">{{ label }}</label>
-    <input type="date" [formControl]="control" />
-    <ng-content select="[error]"></ng-content>
-  `
+  templateUrl: './ui-date-picker.component.html',
+  styleUrls : ['./ui-date-picker.component.scss']
 })
 export class UiDatePickerComponent {
-  @Input() label!: string;
-  @Input() control: any;
+  @Input() label?: string;
+  @Input() control!: FormControl;
 }
