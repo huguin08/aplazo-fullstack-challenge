@@ -1,0 +1,80 @@
+<ui-card class="register-card">
+    <h2>Registro de Usuario</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <!-- Nombre(s) -->
+      <ui-input
+        [control]="form.get('firstName')"
+        label="Nombre(s) *"
+        placeholder="Ingresa tu(s) nombre(s)"
+      >
+        <div error *ngIf="form.get('firstName')?.hasError('required')">
+          Requerido
+        </div>
+      </ui-input>
+  
+      <!-- Apellido Paterno -->
+      <ui-input
+        [control]="form.get('lastName')"
+        label="Apellido Paterno *"
+        placeholder="Ingresa tu apellido paterno"
+      >
+        <div error *ngIf="form.get('lastName')?.hasError('required')">
+          Requerido
+        </div>
+      </ui-input>
+  
+      <!-- Apellido Materno -->
+      <ui-input
+        [control]="form.get('middleName')"
+        label="Apellido Materno *"
+        placeholder="Ingresa tu apellido materno"
+      >
+        <div error *ngIf="form.get('middleName')?.hasError('required')">
+          Requerido
+        </div>
+      </ui-input>
+  
+      <!-- Fecha de Nacimiento -->
+      <ui-date-picker
+        [control]="form.get('birthDate')"
+        label="Fecha de Nacimiento *"
+      >
+        <div error *ngIf="form.get('birthDate')?.hasError('required')">
+          Requerido
+        </div>
+        <div error *ngIf="form.get('birthDate')?.hasError('tooYoung')">
+          Debes ser mayor de 18
+        </div>
+      </ui-date-picker>
+  
+      <!-- Sexo (opcional) -->
+      <ui-select
+        [control]="form.get('sex')"
+        label="Sexo"
+        [options]="[
+          { value: 'M', label: 'Masculino' },
+          { value: 'F', label: 'Femenino' }
+        ]"
+      ></ui-select>
+  
+      <!-- Lugar de Nacimiento (opcional) -->
+      <ui-input
+        [control]="form.get('birthPlace')"
+        label="Lugar de Nacimiento"
+        placeholder="Opcional"
+      ></ui-input>
+  
+      <!-- CURP (opcional) -->
+      <ui-input
+        [control]="form.get('curp')"
+        label="CURP"
+        placeholder="Opcional"
+      ></ui-input>
+  
+      <!-- Botón de envío -->
+      <ui-button type="submit" [disabled]="form.invalid" block>
+        CONTINUAR
+      </ui-button>
+    </form>
+  </ui-card>
