@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<header class="app-header">
+    <!-- Logo clicable -->
+    <img src="assets/logo.png" alt="Logo" class="logo" (click)="goHome()" />
+  
+    <!-- Título dinámico -->
+    <h1>{{ pageTitle }}</h1>
+  
+    <!-- Botón de logout -->
+    <ui-button (click)="logout()">Cerrar sesión</ui-button>
+  </header>
+  
+  <router-outlet></router-outlet>
