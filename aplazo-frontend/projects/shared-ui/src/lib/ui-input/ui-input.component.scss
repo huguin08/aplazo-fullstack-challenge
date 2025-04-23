@@ -1,0 +1,32 @@
+:host {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #333;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  ng-content[select="[error]"] {
+    display: block;
+    margin-top: 0.25rem;
+    color: #d9534f;
+    font-size: 0.875rem;
+  }
