@@ -1,40 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/enviroments/enviroment';
 import { LoanDto } from '../entities/LoanDto';
 
 export interface Loan {
   id: string;
   customerId: string;
-  amount: number;
+  status: string;
   createdAt: string;
-  // …otros campos que devuelva el backend, si los hay
+  paymentPlan: {
+    commissionAmount: number;
+    installments: {
+      amount: number;
+      scheduledPaymentDate: string;
+      status: string;
+    }[];
+  };
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoanService {
-  private readonly baseUrl = `${environment.apiUrl}/loans`;
+  private readonly apiUrl = 'http://localhost:8080/v1/loans';
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Crea un nuevo préstamo para un cliente.
-   * @param data Objeto con customerId y amount.
-   * @returns Observable que emite el préstamo recién creado.
-   */
-  createLoan(data: LoanDto): Observable<Loan> {
-    return this.http.post<Loan>(this.baseUrl, data);
+  createLoan(dto: LoanDto): Observable<Loan> {
+    const token = localStorage.getItem('auth_token');
+    return this.http.post<Loan>(this.apiUrl, dto, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      })
+    });
   }
 
-  /**
-   * Obtiene los detalles de un préstamo existente.
-   * @param loanId UUID del préstamo.
-   * @returns Observable que emite los datos del préstamo.
-   */
-  getLoan(loanId: string): Observable<Loan> {
-    return this.http.get<Loan>(`${this.baseUrl}/${loanId}`);
+  getLoan(id: string): Observable<Loan> {
+    const token = localStorage.getItem('auth_token');
+    return this.http.get<Loan>(`${this.apiUrl}/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      })
+    });
   }
 }

@@ -26,11 +26,8 @@
     // ===== ALIAS PARA shared-ui =====
     "baseUrl": ".",
     "paths": {
-      "shared-ui": [
-        "projects/shared-ui/src/public-api.ts",
-        "./dist/shared-ui"
-      ],
-      "shared-ui/*": ["projects/shared-ui/src/lib/*"]
+      "shared-ui": ["dist/shared-ui"],
+      "shared-ui/*": ["dist/shared-ui/*"]
     }
     // =================================
   },

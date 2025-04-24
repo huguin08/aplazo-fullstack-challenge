@@ -1,0 +1,6 @@
+<div class="ui-select">
+    <label *ngIf="label">{{ label }}</label>
+    <select [formControl]="control">
+      <option *ngFor="let opt of options" [value]="opt.value">{{ opt.label }}</option>
+    </select>
+  </div>
