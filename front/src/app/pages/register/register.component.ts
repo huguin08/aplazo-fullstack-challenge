@@ -9,20 +9,26 @@ import { AplazoButtonComponent } from '@apz/shared-ui/button';
 import { AplazoLogoComponent } from '@apz/shared-ui/logo';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-register',
   templateUrl: './register.component.html',
-  imports: [ReactiveFormsModule, AplazoButtonComponent, AplazoLogoComponent,CommonModule],
+  imports: [ReactiveFormsModule, AplazoButtonComponent, AplazoLogoComponent, CommonModule, RouterModule ],
 })
 export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
-  
+  ) {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      this.router.navigate(['/apz/home']);
+    }
+  }
+
   readonly firstName = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
@@ -85,11 +91,11 @@ export class RegisterComponent {
       this.form.markAllAsTouched();
       return;
     }
-    
-  
+
+
     const { firstName, lastName, secondLastName, dateOfBirth } = this.form.getRawValue();
     const formattedDate = new Date(dateOfBirth!).toISOString().split('T')[0];
-  
+
     this.authService.createCustomer({
       firstName: firstName!,
       lastName: lastName!,
@@ -107,5 +113,5 @@ export class RegisterComponent {
       }
     });
   }
-  
+
 }

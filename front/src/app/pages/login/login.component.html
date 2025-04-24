@@ -1,39 +1,50 @@
-<aplz-ui-logo size="lg"></aplz-ui-logo>
+<div class="form-container max-w-md mx-auto">
+  <aplz-ui-logo size="lg" class="mb-4"></aplz-ui-logo>
 
-<form [formGroup]="form" (ngSubmit)="login()">
-  <div class="grid gap-6 mb-6 md:grid-cols-2">
+  <h1 class="text-xl font-bold mb-2 text-center">Iniciar sesión</h1>
+  <p class="text-sm text-gray-500 mb-6 text-center">
+    Ingresa tus credenciales para continuar
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="login()" class="space-y-4">
     <div>
-      <label for="username" class="block mb-2 text-sm font-medium text-dark">
-        Correo electrónico
+      <label for="username" class="block mb-1 text-sm font-medium text-dark">
+        Correo electrónico *
       </label>
       <input
-        type="text"
+        type="email"
         id="username"
-        class="bg-dark-background border border-dark-secondary text-dark rounded-lg focus:ring-special-info focus:border-special-info block w-full p-2.5"
-        placeholder="my_example_username"
+        class="input-field"
+        placeholder="ejemplo@correo.com"
         formControlName="username"
       />
     </div>
+
     <div>
-      <label for="password" class="block mb-2 text-sm font-medium text-dark">
-        Password
+      <label for="password" class="block mb-1 text-sm font-medium text-dark">
+        Contraseña *
       </label>
       <input
         type="password"
         id="password"
-        class="bg-dark-background border border-dark-secondary text-dark rounded-lg focus:ring-special-info focus:border-special-info block w-full p-2.5"
-        placeholder="•••••••••"
+        class="input-field"
+        placeholder="••••••••"
         formControlName="password"
       />
     </div>
-  </div>
-  <button
-    aplzButton
-    aplzAppearance="stroked"
-    aplzColor="dark"
-    size="md"
-    type="submit"
-  >
-    Entrar
-  </button>
-</form>
+
+    <button
+      aplzButton
+      aplzAppearance="solid"
+      aplzColor="dark"
+      size="md"
+      type="submit"
+      class="w-full"
+      [disabled]="form.invalid"
+    >
+      Entrar
+    </button>
+  </form>
+
+  <p class="text-xs text-gray-400 mt-6 text-center">VERSIÓN: 5.6.0</p>
+</div>

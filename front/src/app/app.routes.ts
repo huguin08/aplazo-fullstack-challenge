@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { HistorialComponent } from './pages/historial/historial.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { authGuard, guestGuard } from './guards/auth.guard'; // 👈 importa los guards
 
 export const routes: Routes = [
   {
@@ -14,10 +15,18 @@ export const routes: Routes = [
   {
     path: ROUTE_CONFIG.register,
     component: RegisterComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'auth/login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then(m => m.LoginComponent),
+    canActivate: [guestGuard], // opcional: evita que usuarios logueados entren
   },
   {
     path: ROUTE_CONFIG.app,
     component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -31,7 +40,7 @@ export const routes: Routes = [
       {
         path: 'loans',
         loadComponent: () =>
-          import('./pages/loan-form/loan-form.component').then(m => m.LoanFormComponent), // ← este lo crearemos
+          import('./pages/loan-form/loan-form.component').then(m => m.LoanFormComponent),
       },
       {
         path: 'loan/:loanId',

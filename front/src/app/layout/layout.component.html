@@ -3,8 +3,7 @@
     <nav class="flex flex-grow flex-shrink-0 justify-between items-center w-full">
       <h2 class="font-medium text-2xl">Layout Principal</h2>
 
-      <button *ngIf="isLoggedIn; else loginButton" aplzButton aplzAppearance="basic" size="md" class="items-center"
-        (click)="logout()">
+      <button aplzButton aplzAppearance="basic" size="md" (click)="logout()">
         <span class="lowercase font-light">Cerrar sesión</span>
       </button>
 

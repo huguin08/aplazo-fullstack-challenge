@@ -39,4 +39,10 @@ export class LoanService {
 
     return this.http.get<LoanResponseDto>(`/v1/loans/${loanId}`, { headers });
   }
+
+  getLoansByCustomerId(customerId: string): Observable<LoanResponseDto[]> {
+    const token = localStorage.getItem('authToken') ?? '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<LoanResponseDto[]>(`/v1/loans?customerId=${customerId}`, { headers });
+  }
 }
