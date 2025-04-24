@@ -1,0 +1,29 @@
+<div class="form-container max-w-md mx-auto">
+    <h2 class="text-xl font-bold mb-4">Detalle del Préstamo</h2>
+
+    <div *ngIf="loan; else errorTpl" class="space-y-4">
+        <p><strong>ID del préstamo:</strong> {{ loan.id }}</p>
+        <p><strong>Cliente:</strong> {{ loan.customerId }}</p>
+        <p><strong>Estado:</strong> {{ loan.status }}</p>
+        <p><strong>Fecha de creación:</strong> {{ loan.createdAt | date }}</p>
+
+        <h3 class="text-lg font-semibold">Plan de pago</h3>
+        <p><strong>Comisión:</strong> {{ loan.paymentPlan.commissionAmount }}</p>
+
+        <div *ngFor="let inst of loan.paymentPlan.installments">
+            <p>
+                <strong>Monto:</strong> {{ inst.amount }},
+                <strong>Fecha:</strong> {{ inst.scheduledPaymentDate }},
+                <strong>Estado:</strong> {{ inst.status }}
+            </p>
+        </div>
+
+        <button aplzButton aplzAppearance="stroked" aplzColor="dark" class="w-full" (click)="finalizar()">
+            Finalizar
+        </button>
+    </div>
+
+    <ng-template #errorTpl>
+        <p class="text-red-500">{{ errorMessage }}</p>
+    </ng-template>
+</div>

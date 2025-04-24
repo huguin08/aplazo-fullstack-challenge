@@ -34,6 +34,11 @@ export const routes: Routes = [
           import('./pages/loan-form/loan-form.component').then(m => m.LoanFormComponent), // ← este lo crearemos
       },
       {
+        path: 'loan/:loanId',
+        loadComponent: () =>
+          import('./pages/loan-detail/loan-detail.component').then(m => m.LoanDetailComponent),
+      },
+      {
         path: ROUTE_CONFIG.historial,
         component: HistorialComponent,
       },

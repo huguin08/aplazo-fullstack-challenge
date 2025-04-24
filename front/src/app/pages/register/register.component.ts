@@ -8,6 +8,8 @@ import {
 import { AplazoButtonComponent } from '@apz/shared-ui/button';
 import { AplazoLogoComponent } from '@apz/shared-ui/logo';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -16,6 +18,11 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, AplazoButtonComponent, AplazoLogoComponent,CommonModule],
 })
 export class RegisterComponent {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+  
   readonly firstName = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],
@@ -74,6 +81,31 @@ export class RegisterComponent {
   ];
 
   register(): void {
-    console.log(this.form.value);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    
+  
+    const { firstName, lastName, secondLastName, dateOfBirth } = this.form.getRawValue();
+    const formattedDate = new Date(dateOfBirth!).toISOString().split('T')[0];
+  
+    this.authService.createCustomer({
+      firstName: firstName!,
+      lastName: lastName!,
+      secondLastName: secondLastName!,
+      dateOfBirth: formattedDate!,
+    }).subscribe({
+      next: ({ token, customer }) => {
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('customerId', customer.id);
+        this.router.navigate(['/apz/home']);
+      },
+      error: (err) => {
+        console.error('Error al registrar cliente:', err);
+        alert('Hubo un error al registrar el cliente. Intenta nuevamente.');
+      }
+    });
   }
+  
 }
