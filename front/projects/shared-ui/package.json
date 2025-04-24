@@ -1,0 +1,21 @@
+{
+  "name": "@apz/shared-ui",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^17.3.0",
+    "@angular/core": "^17.3.0"
+  },
+  "dependencies": {
+    "@apz/shared-ui": "file:",
+    "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./config/tailwind-preset.config.mjs": {
+      "default": "./config/tailwind-preset.config.mjs"
+    },
+    "./config/tailwind-preset.config": {
+      "default": "./config/tailwind-preset.config.mjs"
+    }
+  },
+  "sideEffects": false
+}
