@@ -18,11 +18,26 @@ import { ROUTE_CONFIG } from '../config/routes.config';
   ],
 })
 export class LayoutComponent {
-  readonly #router = inject(Router);
-
   readonly appRoutes = ROUTE_CONFIG;
 
-  clickLogo(): void {
-    this.#router.navigate([ROUTE_CONFIG.home]);
+  private router = inject(Router);
+
+  // ✅ Detectar si está autenticado
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
   }
+
+  // ✅ Redirigir al dar clic en el logo
+  clickLogo(): void {
+    this.router.navigate(['/apz/home']);
+  }
+
+  // ✅ Logout y redirección
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('customerId');
+    this.router.navigate(['/apz/register']);
+  }
+
+  
 }

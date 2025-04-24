@@ -46,17 +46,66 @@
       />
     </div>
 
+    <div class="grid gap-4 md:grid-cols-2">
+      <!-- FECHA DE NACIMIENTO -->
+      <div>
+        <label for="dateOfBirth" class="block mb-1 text-sm font-medium text-dark">
+          Fecha de nacimiento *
+        </label>
+        <input
+          type="date"
+          id="dateOfBirth"
+          class="input-field"
+          formControlName="dateOfBirth"
+        />
+      </div>
+    
+      <!-- SEXO -->
+      <div>
+        <label for="sex" class="block mb-1 text-sm font-medium text-dark">
+          Sexo *
+        </label>
+        <select
+          id="sex"
+          class="input-field"
+          formControlName="sex"
+        >
+          <option value="">Selecciona una opción</option>
+          <option *ngFor="let option of sexOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LUGAR DE NACIMIENTO -->
     <div>
-      <label for="dateOfBirth" class="block mb-1 text-sm font-medium text-dark">
-        Fecha de nacimiento *
+      <label for="birthPlace" class="block mb-1 text-sm font-medium text-dark">
+        Lugar de nacimiento *
+      </label>
+      <select
+        id="birthPlace"
+        class="input-field"
+        formControlName="birthPlace"
+      >
+        <option value="">Selecciona una opción</option>
+        <option *ngFor="let place of birthPlaces" [value]="place">{{ place }}</option>
+      </select>
+    </div>
+
+    <!-- CURP -->
+    <div>
+      <label for="curp" class="block mb-1 text-sm font-medium text-dark">
+        CURP *
       </label>
       <input
-        type="date"
-        id="dateOfBirth"
+        type="text"
+        id="curp"
         class="input-field"
-        formControlName="dateOfBirth"
+        placeholder="Ingresa tu CURP"
+        formControlName="curp"
       />
+      <small class="text-xs text-gray-500 mt-1 block">Ingresa el CURP que aparece en tu INE</small>
     </div>
+
 
     <button
       aplzButton
@@ -72,4 +121,4 @@
   </form>
 
   <p class="text-xs text-gray-400 mt-6 text-center">VERSIÓN: 5.6.0</p>
-</div>
+</div>  
