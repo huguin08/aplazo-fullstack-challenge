@@ -9,7 +9,8 @@ import java.util.UUID;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Loan {
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id")

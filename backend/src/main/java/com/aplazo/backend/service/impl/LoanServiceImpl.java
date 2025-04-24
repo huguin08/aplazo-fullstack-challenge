@@ -36,6 +36,7 @@ public class LoanServiceImpl implements LoanService {
                 .customer(c)
                 .amount(req.getAmount())
                 .status(LoanStatus.ACTIVE)
+                .createdAt(Instant.now())
                 .build();
         loanRepo.save(loan);
 
