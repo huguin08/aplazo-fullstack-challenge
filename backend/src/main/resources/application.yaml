@@ -23,7 +23,7 @@ logging:
     com.aplazo.backend: DEBUG
 
 app:
-  jwtSecret: MyVerySecretKeyThatShouldBeLong
+  jwtSecret: zKnAZEBdC6F7frRrFLGqz1ByC62BqkUeIuV5flGrkJWuO8Ur7Fpl2KNG+xYeg8gWf9A7q0S0MQL3QQ8uKw3J1g==
   jwtExpirationMs: 86400000
 
 springdoc:
